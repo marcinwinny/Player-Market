@@ -1,5 +1,6 @@
 package com.marcinwinny.playermarket.controller;
 
+import com.marcinwinny.playermarket.dto.PlayerDto;
 import com.marcinwinny.playermarket.dto.TeamDto;
 import com.marcinwinny.playermarket.service.TeamService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,13 @@ public class TeamController {
 
     @PostMapping
     public ResponseEntity createTeam(@RequestBody TeamDto teamDto) {
-        teamService.save(teamDto);
+        teamService.insert(teamDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity updateTeam(@RequestBody TeamDto teamDto) {
+        teamService.update(teamDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -28,7 +35,7 @@ public class TeamController {
     }
 
     @GetMapping("/by-id/{id}")
-    public ResponseEntity<TeamDto> getAllTeamsByCountry(@PathVariable Long id) {
+    public ResponseEntity<TeamDto> getTeamById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(teamService.getByTeamId(id));
     }
@@ -39,10 +46,18 @@ public class TeamController {
                 .body(teamService.getAllByCountry(country));
     }
 
+    @GetMapping("/players/{id}")
+    public ResponseEntity<List<PlayerDto>> getAllTeamPlayersByTeamId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(teamService.getAllTeamPlayers(id));
+    }
+
     @DeleteMapping("/by-id/{id}")
     public ResponseEntity deleteTeam(Long id) {
         teamService.deleteTeam(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 
 }

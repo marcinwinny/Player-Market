@@ -15,8 +15,7 @@ public enum Country {
     POLAND("Poland"),
     PORTUGAL("Portugal"),
     NETHERLANDS("Netherlands"),
-    TURKEY("Turkey"),
-    USA("USA");
+    TURKEY("Turkey");
 
     private final String name;
 

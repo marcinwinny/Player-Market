@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "teams")
 public class Team {
 
     @Id
@@ -23,7 +24,7 @@ public class Team {
     private String teamName;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Country is requires")
+    @NotBlank(message = "Country is required")
     private Country country;
 
     @OneToMany(fetch = FetchType.LAZY)
